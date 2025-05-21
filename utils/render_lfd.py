@@ -4,9 +4,12 @@ import open3d as o3d
 import numpy as np
 
 class LightFieldRenderer:
-    def __init__(self, camera_system_path, image_size=256):
+    def __init__(self, camera_system_path=None, image_size=256):
         # Load DodecahedronCameraSystem
-        self.camera_system = DodecahedronCameraSystem.load(camera_system_path)
+        if camera_system_path is None:
+            self.camera_system = DodecahedronCameraSystem()
+        else:
+            self.camera_system = DodecahedronCameraSystem.load(camera_system_path)
         self.image_size = image_size
 
     def render_lfd(self, mesh_path, out_dir):
